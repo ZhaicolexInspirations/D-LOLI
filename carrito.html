@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="estilos.css" />
+    <title>Carrito - D'loli</title>
+  </head>
+  <body class="carrito-page">
+    <!-- HEADER -->
+    <header>
+      <div class="logo">D'loli</div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Volver al inicio</a></li>
+          <li></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="container">
+      <div class="cart-header">
+        <h1>Mi Carrito</h1>
+        <p id="item-count">0 productos</p>
+      </div>
+
+      <div class="cart-content">
+        <!-- PRODUCTOS -->
+        <div class="products-section">
+          <div id="cart-items">
+            <div class="empty-cart">
+              <h2>Tu carrito está vacío</h2>
+              <p>Agrega productos desde nuestro catálogo</p>
+              <a href="index.html" class="btn-primary">Ir al catálogo</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- RESUMEN -->
+        <div class="summary-section" id="summary" style="display: none">
+          <h2>Resumen del pedido</h2>
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="subtotal">$ 0</span>
+          </div>
+          <div class="summary-row">
+            <span>Envío</span>
+            <span id="shipping">A calcular</span>
+          </div>
+          <div class="summary-row total">
+            <span>Total</span>
+            <span id="total">$ 0</span>
+          </div>
+          <button class="checkout-btn" onclick="checkout()">
+            Realizar pedido
+          </button>
+          <div class="continue-shopping">
+            <a href="index.html">← Continuar comprando</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let cart = [];
+      let sessionId = "";
+
+      // Generar ID de sesión único
+      function generateSessionId() {
+        return (
+          "session_" +
+          Date.now() +
+          "_" +
+          Math.random().toString(36).substr(2, 9)
+        );
+      }
+
+      // Obtener o crear ID de sesión
+      function getSessionId() {
+        // Buscar en sessionStorage (se borra al cerrar navegador/pestaña)
+        let session = sessionStorage.getItem("zhaicolezSessionId");
+
+        if (!session) {
+          // Crear nueva sesión
+          session = generateSessionId();
+          sessionStorage.setItem("zhaicolezSessionId", session);
+          console.log("Nueva sesión creada:", session);
+        } else {
+          console.log("Sesión existente:", session);
+        }
+
+        return session;
+      }
+
+      // Cargar carrito de la sesión actual
+      function loadCart() {
+        sessionId = getSessionId();
+        const cartKey = "zhaicolezCart_" + sessionId;
+        const savedCart = localStorage.getItem(cartKey);
+
+        if (savedCart) {
+          cart = JSON.parse(savedCart);
+          console.log("Carrito cargado para sesión:", sessionId, cart);
+        } else {
+          cart = [];
+          console.log("Carrito nuevo para sesión:", sessionId);
+        }
+
+        renderCart();
+      }
+
+      // Escuchar mensajes de otras ventanas (catálogo)
+      window.addEventListener("message", function (event) {
+        if (event.data.action === "addToCart") {
+          addToCartFromCatalog(event.data.product);
+        }
+      });
+
+      // Guardar carrito en localStorage con ID de sesión
+      function saveCart() {
+        const cartKey = "zhaicolezCart_" + sessionId;
+        localStorage.setItem(cartKey, JSON.stringify(cart));
+        console.log("Carrito guardado:", cartKey, cart);
+      }
+
+      // Limpiar carritos antiguos (opcional - limpia sesiones de más de 7 días)
+      function cleanOldCarts() {
+        const now = Date.now();
+        const maxAge = 7 * 24 * 60 * 60 * 1000; // 7 días en milisegundos
+
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (key && key.startsWith("zhaicolezCart_session_")) {
+            try {
+              const timestamp = parseInt(key.split("_")[2]);
+              if (now - timestamp > maxAge) {
+                localStorage.removeItem(key);
+                console.log("Carrito antiguo eliminado:", key);
+              }
+            } catch (e) {
+              console.log("Error al limpiar carrito:", e);
+            }
+          }
+        }
+      }
+
+      // Agregar producto desde catálogo
+      function addToCartFromCatalog(product) {
+        const existingIndex = cart.findIndex(
+          (item) =>
+            item.brand === product.brand &&
+            item.name === product.name &&
+            item.size === product.size
+        );
+
+        if (existingIndex !== -1) {
+          cart[existingIndex].quantity += 1;
+        } else {
+          cart.push({ ...product, quantity: 1 });
+        }
+
+        saveCart();
+        renderCart();
+      }
+
+      // Renderizar carrito
+      function renderCart() {
+        const cartItemsDiv = document.getElementById("cart-items");
+        const summaryDiv = document.getElementById("summary");
+        const itemCount = document.getElementById("item-count");
+
+        if (cart.length === 0) {
+          cartItemsDiv.innerHTML = `
+          <div class="empty-cart">
+            <h2>Tu carrito está vacío</h2>
+            <p>Agrega productos desde nuestro catálogo</p>
+            <a href="index.html" class="btn-primary">Ir al catálogo</a>
+          </div>
+        `;
+          summaryDiv.style.display = "none";
+          itemCount.textContent = "0 productos";
+          return;
+        }
+
+        // Renderizar productos
+        cartItemsDiv.innerHTML = cart
+          .map(
+            (item, index) => `
+        <div class="cart-item">
+          <img src="${item.image}" alt="${item.name}" class="item-image" />
+          <div class="item-details">
+            <div class="item-brand">${item.brand}</div>
+            <div class="item-name">${item.name}</div>
+            <div class="item-type">${item.type}</div>
+            <div class="item-size">📏 ${item.size}</div>
+            <div class="item-actions">
+              <div class="quantity-controls">
+                <button class="quantity-btn" onclick="updateQuantity(${index}, -1)">−</button>
+                <span class="quantity">${item.quantity}</span>
+                <button class="quantity-btn" onclick="updateQuantity(${index}, 1)">+</button>
+              </div>
+              <button class="remove-btn" onclick="removeItem(${index})">Eliminar</button>
+            </div>
+          </div>
+          <div class="item-price">$ ${(
+            item.price * item.quantity
+          ).toLocaleString("es-CO")}</div>
+        </div>
+      `
+          )
+          .join("");
+
+        // Actualizar resumen
+        const subtotal = cart.reduce(
+          (sum, item) => sum + item.price * item.quantity,
+          0
+        );
+        document.getElementById(
+          "subtotal"
+        ).textContent = `$ ${subtotal.toLocaleString("es-CO")}`;
+        document.getElementById(
+          "total"
+        ).textContent = `$ ${subtotal.toLocaleString("es-CO")}`;
+
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        itemCount.textContent = `${totalItems} producto${
+          totalItems !== 1 ? "s" : ""
+        }`;
+
+        summaryDiv.style.display = "block";
+      }
+
+      // Actualizar cantidad
+      function updateQuantity(index, change) {
+        cart[index].quantity += change;
+        if (cart[index].quantity <= 0) {
+          cart.splice(index, 1);
+        }
+        saveCart();
+        renderCart();
+      }
+
+      // Eliminar producto
+      function removeItem(index) {
+        if (confirm("¿Estás seguro de eliminar este producto?")) {
+          cart.splice(index, 1);
+          saveCart();
+          renderCart();
+        }
+      }
+
+      // Realizar pedido
+      function checkout() {
+        const message = cart
+          .map(
+            (item) =>
+              `${item.brand} - ${item.name}\nTamaño: ${item.size}\nCantidad: ${
+                item.quantity
+              }\nPrecio: $${(item.price * item.quantity).toLocaleString(
+                "es-CO"
+              )}`
+          )
+          .join("\n\n");
+
+        const total = cart.reduce(
+          (sum, item) => sum + item.price * item.quantity,
+          0
+        );
+        const whatsappMessage = encodeURIComponent(
+          `¡Hola! Quiero realizar el siguiente pedido:\n\n${message}\n\n*Total: $${total.toLocaleString(
+            "es-CO"
+          )}*`
+        );
+
+        window.open(
+          `https://wa.me/573156957794?text=${whatsappMessage}`,
+          "_blank"
+        );
+      }
+
+      // Cargar carrito al iniciar
+      loadCart();
+      cleanOldCarts(); // Limpiar carritos antiguos
+      function irArriba() {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+    </script>
+    <button class="btn-arriba" onclick="irArriba()">↑</button>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="estilos.css">
+    <title>Cliente D'loli</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+ 
+  </head>
+ 
+  <body>
+    
+    <header>
+      
+      
+      
+      <div class="logo">D'loli</div>
+
+    <nav>   
+        <ul>
+          <li><a href="embu.html">Embutidos</a></li>
+          <li><a href="postres.html">Postres y Tortas</a></li>
+          <li><a href="platoslistos.html">Descongelar y Comer</a></li>
+          <li><a href="entradas.html">Entradas</a></li>
+          <li><a href="index.html" class="active">Inicio</a></li>
+        </ul>
+        </ul>
+      </nav>
+        
+        
+      </div>
+    </header>
+    <div class="search-box">
+     
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="¿Que vamos a comer hoy?.."
+        onkeyup="buscarPerfume()"/>
+
+        <p id="noResults" style="display:none; text-align:center; margin-top:15px; font-weight:bold; color:#7b1e1e;">
+          No se encontraron productos 🍷
+        </p>
+    </div>
+    
+  
+
+    <!-- MINICART (VISUAL) -->
+    <aside class="minicart">
+      <h2>Lo mas Destacado</h2>
+
+
+       <!-- CONTENEDOR 1 -->
+<div class="cart-container">
+
+  <div class="cart-item">
+    <img src="imagenes/lasagna_bolonesa.jpeg" alt="Lasagna" class="imagen-mediana">
+    <div class="cart-info">
+      <p><strong>Lasagna boloñesa</strong></p>
+      <p>Deliciosa</p>
+      <p>Para Comer en Familia</p>
+      
+      <details class="price-dropdown">
+        <summary>Precios</summary>
+      
+        <div class="price-options">
+          <div class="price-option">
+            <input type="radio" name="size-lasagna" value="30ml|19990">
+            <label>
+              <span class="size">30ml</span>
+              <span class="price">$19.990</span>
+            </label>
+          </div>
+      
+          <div class="price-option">
+            <input type="radio" name="size-lasagna" value="50ml|34990">
+            <label>
+              <span class="size">50ml</span>
+              <span class="price">$ 34.990</span>
+            </label>
+          </div>
+      
+          <div class="price-option">
+            <input type="radio" name="size-lasagna" value="100ml|54990">
+            <label>
+              <span class="size">100ml</span>
+              <span class="price">$ 54.990</span>
+            </label>
+          </div>
+      
+          <div class="price-option">
+            <input type="radio" name="size-lasagna" value="1.1|120000">
+            <label>
+              <span class="size">1.1 (Premium)</span>
+              <span class="price">$ 119.990</span>
+            </label>
+          </div>
+        </div>
+      </details>
+    </div>
+  </div>
+  
+
+    <div class="cart-item">
+      <img src="imagenes/lasagna_mariscos.jpeg" alt="Lasagna" class="imagen-mediana">
+      <div class="cart-info">
+        <p><strong>Lasagna Mariscos</strong></p>
+        <p> <strong>Descongelar y calentar</strong></p>
+        <p>La mezcla de los frutos del mar.</p>
+        
+        <details class="price-dropdown">
+          <summary>Precios</summary>
+        
+          <div class="price-options">
+            <div class="price-option">
+              <input type="radio" name="size-lasagna" value="30ml|19990">
+              <label>
+                <span class="size">30ml</span>
+                <span class="price">$19.990</span>
+              </label>
+            </div>
+        
+            <div class="price-option">
+              <input type="radio" name="size-lasagna" value="50ml|34990">
+              <label>
+                <span class="size">50ml</span>
+                <span class="price">$ 34.990</span>
+              </label>
+            </div>
+        
+            <div class="price-option">
+              <input type="radio" name="size-lasagna" value="100ml|54990">
+              <label>
+                <span class="size">100ml</span>
+                <span class="price">$ 54.990</span>
+              </label>
+            </div>
+        
+            <div class="price-option">
+              <input type="radio" name="size-lasagna" value="1.1|120000">
+              <label>
+                <span class="size">1.1 (Premium)</span>
+                <span class="price">$ 119.990</span>
+              </label>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+    
+
+
+      <div class="cart-item">
+        <img src="imagenes/paella_mixtacarne_mariscos.jpeg" alt="Lasagna" class="imagen-mediana">
+        <div class="cart-info">
+          <p><strong>Paella Mixta Carne Mariscos</strong></p>
+          <p>Deliciosa</p>
+          <p>Para Comer en Familia</p>
+          
+          <details class="price-dropdown">
+            <summary>Precios</summary>
+          
+            <div class="price-options">
+              <div class="price-option">
+                <input type="radio" name="size-lasagna" value="30ml|19990">
+                <label>
+                  <span class="size">30ml</span>
+                  <span class="price">$19.990</span>
+                </label>
+              </div>
+          
+              <div class="price-option">
+                <input type="radio" name="size-lasagna" value="50ml|34990">
+                <label>
+                  <span class="size">50ml</span>
+                  <span class="price">$ 34.990</span>
+                </label>
+              </div>
+          
+              <div class="price-option">
+                <input type="radio" name="size-lasagna" value="100ml|54990">
+                <label>
+                  <span class="size">100ml</span>
+                  <span class="price">$ 54.990</span>
+                </label>
+              </div>
+          
+              <div class="price-option">
+                <input type="radio" name="size-lasagna" value="1.1|120000">
+                <label>
+                  <span class="size">1.1 (Premium)</span>
+                  <span class="price">$ 119.990</span>
+                </label>
+              </div>
+            </div>
+          </details>
+        </div>
+      </div>
+      
+        <div class="cart-item">
+          <img src="imagenes/lasagña_atun.jpeg" alt="Lasagna" class="imagen-mediana">
+          <div class="cart-info">
+            <p><strong>Lasagña atún</strong></p>
+            <p>Deliciosa</p>
+            <p>Para Comer en Familia</p>
+            
+            <details class="price-dropdown">
+              <summary>Precios</summary>
+            
+              <div class="price-options">
+                <div class="price-option">
+                  <input type="radio" name="size-lasagna" value="30ml|19990">
+                  <label>
+                    <span class="size">30ml</span>
+                    <span class="price">$19.990</span>
+                  </label>
+                </div>
+            
+                <div class="price-option">
+                  <input type="radio" name="size-lasagna" value="50ml|34990">
+                  <label>
+                    <span class="size">50ml</span>
+                    <span class="price">$ 34.990</span>
+                  </label>
+                </div>
+            
+                <div class="price-option">
+                  <input type="radio" name="size-lasagna" value="100ml|54990">
+                  <label>
+                    <span class="size">100ml</span>
+                    <span class="price">$ 54.990</span>
+                  </label>
+                </div>
+            
+                <div class="price-option">
+                  <input type="radio" name="size-lasagna" value="1.1|120000">
+                  <label>
+                    <span class="size">1.1 (Premium)</span>
+                    <span class="price">$ 119.990</span>
+                  </label>
+                </div>
+              </div>
+            </details>
+          </div>
+        </div>
+        
+
+</div>
+
+    </aside>
+    <aside class="minicart">
+      <h2>Las Mas Preferidas</h2>
+      <!-- CONTENEDOR 2 -->
+<div class="cart-container">
+
+
+    <div class="cart-item">
+      <img src="imagenes/tortilla_española.jpeg" alt="Lasagna" class="imagen-mediana">
+      <div class="cart-info">
+        <p><strong>Tortilla Española</strong></p>
+        <p>Deliciosa</p>
+        <p>Para Comer en Familia</p>
+        
+        <details class="price-dropdown">
+          <summary>Precios</summary>
+        
+          <div class="price-options">
+            <div class="price-option">
+              <input type="radio" name="size-lasagna" value="30ml|19990">
+              <label>
+                <span class="size">30ml</span>
+                <span class="price">$19.990</span>
+              </label>
+            </div>
+        
+            <div class="price-option">
+              <input type="radio" name="size-lasagna" value="50ml|34990">
+              <label>
+                <span class="size">50ml</span>
+                <span class="price">$ 34.990</span>
+              </label>
+            </div>
+        
+            <div class="price-option">
+              <input type="radio" name="size-lasagna" value="100ml|54990">
+              <label>
+                <span class="size">100ml</span>
+                <span class="price">$ 54.990</span>
+              </label>
+            </div>
+        
+            <div class="price-option">
+              <input type="radio" name="size-lasagna" value="1.1|120000">
+              <label>
+                <span class="size">1.1 (Premium)</span>
+                <span class="price">$ 119.990</span>
+              </label>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+    
+  
+
+ 
+
+      <div class="cart-item">
+        <img src="imagenes/lasagna_bolonesa.jpeg" alt="Lasagna" class="imagen-mediana">
+        <div class="cart-info">
+          <p><strong>Lasagna boloñesa</strong></p>
+          <p>Deliciosa</p>
+          <p>Para Comer en Familia</p>
+          
+          <details class="price-dropdown">
+            <summary>Precios</summary>
+          
+            <div class="price-options">
+              <div class="price-option">
+                <input type="radio" name="size-lasagna" value="30ml|19990">
+                <label>
+                  <span class="size">30ml</span>
+                  <span class="price">$19.990</span>
+                </label>
+              </div>
+          
+              <div class="price-option">
+                <input type="radio" name="size-lasagna" value="50ml|34990">
+                <label>
+                  <span class="size">50ml</span>
+                  <span class="price">$ 34.990</span>
+                </label>
+              </div>
+          
+              <div class="price-option">
+                <input type="radio" name="size-lasagna" value="100ml|54990">
+                <label>
+                  <span class="size">100ml</span>
+                  <span class="price">$ 54.990</span>
+                </label>
+              </div>
+          
+              <div class="price-option">
+                <input type="radio" name="size-lasagna" value="1.1|120000">
+                <label>
+                  <span class="size">1.1 (Premium)</span>
+                  <span class="price">$ 119.990</span>
+                </label>
+              </div>
+            </div>
+          </details>
+        </div>
+      </div>
+      
+
+  
+  
+
+        <div class="cart-item">
+          <img src="imagenes/lasagna_bolonesa.jpeg" alt="Lasagna" class="imagen-mediana">
+          <div class="cart-info">
+            <p><strong>Lasagna boloñesa</strong></p>
+            <p>Deliciosa</p>
+            <p>Para Comer en Familia</p>
+            
+            <details class="price-dropdown">
+              <summary>Precios</summary>
+            
+              <div class="price-options">
+                <div class="price-option">
+                  <input type="radio" name="size-lasagna" value="30ml|19990">
+                  <label>
+                    <span class="size">30ml</span>
+                    <span class="price">$19.990</span>
+                  </label>
+                </div>
+            
+                <div class="price-option">
+                  <input type="radio" name="size-lasagna" value="50ml|34990">
+                  <label>
+                    <span class="size">50ml</span>
+                    <span class="price">$ 34.990</span>
+                  </label>
+                </div>
+            
+                <div class="price-option">
+                  <input type="radio" name="size-lasagna" value="100ml|54990">
+                  <label>
+                    <span class="size">100ml</span>
+                    <span class="price">$ 54.990</span>
+                  </label>
+                </div>
+            
+                <div class="price-option">
+                  <input type="radio" name="size-lasagna" value="1.1|120000">
+                  <label>
+                    <span class="size">1.1 (Premium)</span>
+                    <span class="price">$ 119.990</span>
+                  </label>
+                </div>
+              </div>
+            </details>
+          </div>
+        </div>
+        
+
+
+        
+
+          <div class="cart-item">
+            <img src="imagenes/lasagna_bolonesa.jpeg" alt="Lasagna" class="imagen-mediana">
+            <div class="cart-info">
+              <p><strong>Lasagna boloñesa</strong></p>
+              <p>Deliciosa</p>
+              <p>Para Comer en Familia</p>
+              
+              <details class="price-dropdown">
+                <summary>Precios</summary>
+              
+                <div class="price-options">
+                  <div class="price-option">
+                    <input type="radio" name="size-lasagna" value="30ml|19990">
+                    <label>
+                      <span class="size">30ml</span>
+                      <span class="price">$19.990</span>
+                    </label>
+                  </div>
+              
+                  <div class="price-option">
+                    <input type="radio" name="size-lasagna" value="50ml|34990">
+                    <label>
+                      <span class="size">50ml</span>
+                      <span class="price">$ 34.990</span>
+                    </label>
+                  </div>
+              
+                  <div class="price-option">
+                    <input type="radio" name="size-lasagna" value="100ml|54990">
+                    <label>
+                      <span class="size">100ml</span>
+                      <span class="price">$ 54.990</span>
+                    </label>
+                  </div>
+              
+                  <div class="price-option">
+                    <input type="radio" name="size-lasagna" value="1.1|120000">
+                    <label>
+                      <span class="size">1.1 (Premium)</span>
+                      <span class="price">$ 119.990</span>
+                    </label>
+                  </div>
+                </div>
+              </details>
+            </div>
+          </div>
+          
+</div>
+
+
+    </aside>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-columns">
+        <div>
+          <h4>Atención al cliente</h4>
+          <ul>
+            <li><a href="tel:+573151821269">Contactanos</a></li>
+
+            <li><a href="tel:+573151821269">Devoluciones</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>D'loli</h4>
+          <ul>
+
+            
+            <li><a href="#" id="verSobreNosotros">Sobre Nosotros</a>
+            </li>
+            <a href="https://wa.me/573151821269" target="_blank"
+            >Trabaja con nosotros</a>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#" id="verTerminos">Términos y Condiciones</a>
+            </li>
+            <li>Privacidad</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Síguenos</h4>
+          <ul>
+            <li><a href="https://www.instagram.com/zhaicolexinspirations?igsh=MWN2NmU1YmVtbXdhMQ==" target="_blank">
+            Instagram
+            </a>
+            </li>
+            <li><a href="https://www.facebook.com/profile.php?id=61582595425156" target="_blank">
+              Facebook
+            </a>
+            </li>
+            
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 D'loli</span>
+        
+      </div>
+    </footer>
+  
+
+
+
+<a href="https://wa.me/573156957794?text=Hola,%20estoy%20interesado%20en%20un%20producto"
+target="_blank"
+class="whatsapp-centro">
+WhatsApp
+</a>
+
+<button class="btn-arriba" onclick="irArriba()">↑</button>
+<a href="carrito.html" class="btn-carrito">🛒</a>
+<script src="script.js"></script>
+
+</body>
+
+</html>
