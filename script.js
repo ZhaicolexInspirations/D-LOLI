@@ -85,8 +85,16 @@ function addCartButtons() {
       // Obtener la opción seleccionada
       const selectedOption = item.querySelector('input[type="radio"]:checked');
       if (selectedOption) {
-        const [size, priceStr] = selectedOption.value.split("|");
-        const price = parseInt(priceStr);
+        const size = selectedOption
+          .closest(".price-option")
+          .querySelector(".size").innerText;
+
+        let priceText = selectedOption
+          .closest(".price-option")
+          .querySelector(".price").innerText;
+
+        // Limpiar texto "$14.000" → 14000
+        const price = parseInt(priceText.replace(/\D/g, ""));
         addToCart(brand, name, type, size, price, image);
       } else {
         // Resaltar las opciones con animación
@@ -105,7 +113,20 @@ function addCartButtons() {
 
 // Función para agregar al carrito con sesión
 function addToCart(brand, name, type, size, price, image) {
+  // 🔑 Obtener o crear sessionId
+  let sessionId = sessionStorage.getItem("zhaicolezSessionId");
+
+  if (!sessionId) {
+    sessionId =
+      "session_" + Date.now() + "_" + Math.random().toString(36).substr(2, 9);
+
+    sessionStorage.setItem("zhaicolezSessionId", sessionId);
+  }
+
+  // 🛒 Clave del carrito
   const cartKey = "zhaicolezCart_" + sessionId;
+
+  // 📦 Obtener carrito actual
   let cart = [];
   const savedCart = localStorage.getItem(cartKey);
 
@@ -113,10 +134,12 @@ function addToCart(brand, name, type, size, price, image) {
     cart = JSON.parse(savedCart);
   }
 
+  // 🔍 Buscar si ya existe
   const existingIndex = cart.findIndex(
     (item) => item.brand === brand && item.name === name && item.size === size
   );
 
+  // ➕ Agregar o sumar cantidad
   if (existingIndex !== -1) {
     cart[existingIndex].quantity += 1;
   } else {
@@ -131,11 +154,68 @@ function addToCart(brand, name, type, size, price, image) {
     });
   }
 
+  // 💾 Guardar carrito
   localStorage.setItem(cartKey, JSON.stringify(cart));
-  console.log("Producto agregado al carrito de sesión:", sessionId);
 
-  // Mostrar notificación
+  console.log("Producto agregado:", cart);
+
+  // 🔔 Notificación
   showNotification("¡Producto agregado al carrito!");
+
+  // 🔢 Actualizar contador
+  updateCartBadge();
+}
+function addToCart(brand, name, type, size, price, image) {
+  // 🔑 Obtener o crear sessionId
+  let sessionId = sessionStorage.getItem("zhaicolezSessionId");
+
+  if (!sessionId) {
+    sessionId =
+      "session_" + Date.now() + "_" + Math.random().toString(36).substr(2, 9);
+
+    sessionStorage.setItem("zhaicolezSessionId", sessionId);
+  }
+
+  // 🛒 Clave del carrito
+  const cartKey = "zhaicolezCart_" + sessionId;
+
+  // 📦 Obtener carrito actual
+  let cart = [];
+  const savedCart = localStorage.getItem(cartKey);
+
+  if (savedCart) {
+    cart = JSON.parse(savedCart);
+  }
+
+  // 🔍 Buscar si ya existe
+  const existingIndex = cart.findIndex(
+    (item) => item.brand === brand && item.name === name && item.size === size
+  );
+
+  // ➕ Agregar o sumar cantidad
+  if (existingIndex !== -1) {
+    cart[existingIndex].quantity += 1;
+  } else {
+    cart.push({
+      brand,
+      name,
+      type,
+      size,
+      price,
+      image,
+      quantity: 1,
+    });
+  }
+
+  // 💾 Guardar carrito
+  localStorage.setItem(cartKey, JSON.stringify(cart));
+
+  console.log("Producto agregado:", cart);
+
+  // 🔔 Notificación
+  showNotification("¡Producto agregado al carrito!");
+
+  // 🔢 Actualizar contador
   updateCartBadge();
 }
 
