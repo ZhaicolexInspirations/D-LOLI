@@ -28,12 +28,50 @@ header {
 }
 
 .logo {
-  font-size: 32px;
+  font-family: 'Pacifico', cursive;
+ 
+  
+  font-size: 40px;
   font-weight: bold;
-  letter-spacing: 2px;
-  font-family: cursive;
+  color: #f9d423;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
+.logo:hover {
+  transform: scale(1.1);
+  color: #ffffff;
+}
+.logo-container {
+  .header {
+    position: relative;
+    padding: 20px;
+  }
+}
+
+/* 👇 slogan centrado arriba del header */
+.slogan {
+  font-family: cursive;
+  position: absolute;
+  top: 30px; /* 🔥 aquí controlas qué tan abajo queda */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 30px;
+  color: #ffffff;
+}
+@media (max-width: 600px) {
+  .slogan {
+    position: static;
+    transform: none;
+    margin-bottom: 5px;
+    font-family:cursive;
+  }
+
+  .logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
 nav ul {
   list-style: none;
   display: flex;
